@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titel %}
+Home page
+{% endblock titel %}
+
+{% block content %}
+    <div class="m-5">
+        {% for post in posts %}
+        <div class="card m-3">
+            <h5 class="card-header">{{post.title}}</h5>
+            <div class="card-body">
+              <p class="card-text">{{post.contnet}}</p>
+              <h6 class="card-title">Author: {{post.author.name}}</h6>
+              <p>
+                Category: {% for cat in post.category.all %}
+                <button class="btn btn-primary btn-sm">{{cat}}</button>
+                {% endfor%}
+              </p>
+              <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Edit</a>
+              <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
